@@ -1,5 +1,11 @@
-## Next.js App Router Course - Starter
+# wdd430-group-8
+WDD 430 Group 8 Project - Handcrafted Haven
 
-This is the starter template for the Next.js App Router Course. It contains the starting code for the dashboard application.
+## Team Members
+* Andres Rodas Cassagne
+* Andrew Weist
+* Hector Olivares Tapia
+* Jared Likeke Kimball Serrao
+* Rutendo Leonah Dongo
 
-For more information, see the [course curriculum](https://nextjs.org/learn) on the Next.js Website.
+Next.js starter template from [Learn Next.js](https://nextjs.org/learn).
