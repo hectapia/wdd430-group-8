@@ -11,11 +11,17 @@ export default function Page() {
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
           <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
-            <strong>Welcome to Acme.</strong> This is the example for the{' '}
+            <strong>Handcrafted Haven</strong> This an innovative web application{' '}
+            that aims to provide a platform for artisans and crafters{' '}
+            to showcase and sell their unique handcrafted items, brought to you by
+            WDD 430: Web Full-Stack Development
+            <a href="https://byui-cse.github.io/wdd430-ww-course/pages/group-project-description.html" className="text-blue-500">
+            {' '}WDD 430: Web Full-Stack Development
+            </a>                
+            {' '}and  Vercel.{' '}
             <a href="https://nextjs.org/learn/" className="text-blue-500">
               Next.js Learn Course
-            </a>
-            , brought to you by Vercel.
+            </a>            
           </p>
           <Link
             href="/login"
