@@ -1,9 +1,9 @@
 const { db } = require('@vercel/postgres');
 const {
-  invoices,
+  users,
+  handcrafts,
   customers,
   revenue,
-  users,
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
@@ -34,14 +34,62 @@ async function seedUsers(client) {
       }),
     );
 
-    console.log(`Seeded ${insertedUsers.length} users`);
+    console.log(`Seeded ${insertedArtisans.length} artisans`);
 
     return {
       createTable,
-      users: insertedUsers,
+      artisans: insertedArtisans,
     };
   } catch (error) {
-    console.error('Error seeding users:', error);
+    console.error('Error seeding artisans:', error);
+    throw error;
+  }
+}
+
+async function seedHandcrafts(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+    // Create the "handcrafts" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS handcrafts (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        artisan_id UUID NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        description VARCHAR(255) NOT NULL,
+        price INT NOT NULL,
+        category VARCHAR(255) NOT NULL,
+        image_url VARCHAR(255) NOT NULL,
+        type VARCHAR(255) NOT NULL,
+        review VARCHAR(255),
+        rate VARCHAR(255)
+      );
+    `;
+
+    console.log(`Created "handcrafts" table`);
+
+    // Insert data into the "handcrafts" table
+    const insertedHandcrafts = await Promise.all(
+      handcrafts.map(
+        (handcraft) => client.sql`
+        INSERT INTO handcrafts (id, user_id, name, description, price,
+          category, image_url, type, review,rate
+        )
+        VALUES (${handcraft.id}, ${handcraft.user_id}, ${handcraft.name}, ${handcraft.description}, 
+                ${handcraft.price}, ${handcraft.category}, ${handcraft.image_url}, 
+                ${handcraft.type}, ${handcraft.review}, ${handcraft.rate})
+        ON CONFLICT (id) DO NOTHING;
+      `,
+    ),
+  );
+
+    console.log(`Seeded ${insertedHandcrafts.length} handcrafts`);
+
+    return {
+      createTable,
+      handcrafts: insertedHandcrafts,
+    };
+  } catch (error) {
+    console.error('Error seeding handcrafts:', error);
     throw error;
   }
 }
@@ -164,6 +212,7 @@ async function main() {
   const client = await db.connect();
 
   await seedUsers(client);
+  await seedHandcrafts(client);
   await seedCustomers(client);
   await seedInvoices(client);
   await seedRevenue(client);
