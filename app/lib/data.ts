@@ -5,6 +5,7 @@ import {
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
+  LatestProductRaw,
   User,
   Revenue,
 } from './definitions';
@@ -29,6 +30,26 @@ export async function fetchRevenue() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch revenue data.');
+  }
+}
+
+export async function fetchLatestProducts() {
+  try {
+    const data = await sql<LatestProductRaw>`
+      SELECT artisans.fname, artisans.lname, products.price, products.name, products.image_url, products.description, products.id
+      FROM products
+      JOIN artisans ON products.artisan_id = artisans.id
+      ORDER BY products.date DESC
+      LIMIT 5`;
+
+    const latestProducts = data.rows.map((product) => ({
+      ...product,
+      price: formatCurrency(product.price),
+    }));
+    return latestProducts;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the latest products.');
   }
 }
 
