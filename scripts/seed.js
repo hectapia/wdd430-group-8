@@ -16,7 +16,10 @@ async function seedArtisans(client) {
         fname VARCHAR(45) NOT NULL,
         lname VARCHAR(45) NOT NULL,
         email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        category VARCHAR(45) NOT NULL,
+        story TEXT NOT NULL,
+        image_url VARCHAR(255) NOT NULL
       );
     `;
 
@@ -27,8 +30,10 @@ async function seedArtisans(client) {
       artisans.map(async (artisan) => {
         const hashedPassword = await bcrypt.hash(artisan.password, 10);
         return client.sql`
-        INSERT INTO artisans (id, lname,  fname, email, password)
-        VALUES (${artisan.id}, ${artisan.lname},  ${artisan.fname}, ${artisan.email}, ${hashedPassword})
+        INSERT INTO artisans (id, lname,  fname, email, password, 
+                              category, story, image_url)
+        VALUES (${artisan.id}, ${artisan.lname},  ${artisan.fname}, ${artisan.email}, 
+                ${hashedPassword}, ${artisan.category}, ${artisan.story}, ${artisan.image_url})
         ON CONFLICT (id) DO NOTHING;
       `;
       }),
