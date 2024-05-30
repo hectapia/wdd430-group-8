@@ -19,7 +19,7 @@ async function seedArtisans(client) {
         password TEXT NOT NULL,
         category VARCHAR(45) NOT NULL,
         story TEXT NOT NULL,
-        image_url VARCHAR(255) NOT NULL
+        image_url_artisan VARCHAR(255) NOT NULL
       );
     `;
 
@@ -31,9 +31,9 @@ async function seedArtisans(client) {
         const hashedPassword = await bcrypt.hash(artisan.password, 10);
         return client.sql`
         INSERT INTO artisans (id, lname,  fname, email, password, 
-                              category, story, image_url)
+                              category, story, image_url_artisan)
         VALUES (${artisan.id}, ${artisan.lname},  ${artisan.fname}, ${artisan.email}, 
-                ${hashedPassword}, ${artisan.category}, ${artisan.story}, ${artisan.image_url})
+                ${hashedPassword}, ${artisan.category}, ${artisan.story}, ${artisan.image_url_artisan})
         ON CONFLICT (id) DO NOTHING;
       `;
       }),

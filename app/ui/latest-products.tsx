@@ -47,8 +47,8 @@ export default async function LatestProducts({
                     </p>
                     <p className="text-sm font-semibold text-gray-500 sm:block">
                       <Image
-                        src={product.image_artisan}
-                        alt={`${product.image_artisan}'s profile picture`}
+                        src={product.image_url_artisan}
+                        alt={`${product.image_url_artisan}'s profile picture`}
                         className="mr-4 rounded-full"
                         width={32}
                         height={32}
