@@ -46,7 +46,15 @@ export default async function LatestProducts({
                       {product.description}
                     </p>
                     <p className="text-sm font-semibold text-gray-500 sm:block">
-                      {`By ${product.fname} ${product.lname}`}
+                      <Image
+                        src={product.image_artisan}
+                        alt={`${product.image_artisan}'s profile picture`}
+                        className="mr-4 rounded-full"
+                        width={32}
+                        height={32}
+                      />
+                      {`By ${product.fname} ${product.lname}`}  &nbsp;&nbsp;&nbsp;  {`Category: ${product.category}`}
+
                     </p>
                     <p
                       className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
