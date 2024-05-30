@@ -27,6 +27,7 @@ export type LatestProduct = {
   // These fields belong to artisans table
   fname: string;
   lname: string;
+  image_artisan: string;
 };
 
 export type Product = {
