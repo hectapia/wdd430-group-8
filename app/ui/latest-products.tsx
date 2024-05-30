@@ -54,7 +54,6 @@ export default async function LatestProducts({
                         height={32}
                       />
                       {`By ${product.fname} ${product.lname}`}  &nbsp;&nbsp;&nbsp;  {`Category: ${product.category}`}
-
                     </p>
                     <p
                       className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
