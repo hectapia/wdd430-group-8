@@ -37,7 +37,7 @@ export async function fetchLatestProducts() {
   try {
     const data = await sql<LatestProductRaw>`
       SELECT artisans.fname, artisans.lname, artisans.category, 
-             artisans.image_url AS image_artisan, products.price, products.name, 
+             artisans.image_url_artisan, products.price, products.name, 
              products.image_url, products.description, products.id
       FROM products
       JOIN artisans ON products.artisan_id = artisans.id

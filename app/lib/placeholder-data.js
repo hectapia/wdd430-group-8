@@ -10,7 +10,7 @@ const artisans = [
     password: '123456',
     category: 'Potter',
     story: 'In a small village nestled by the river, lived Delba, a talented potter. Her hands, calloused and skilled, molded clay into delicate bowls and vases that captured the essence of her surroundings. Each morning, she would gather clay from the riverbank, feeling the cool, pliable earth between her fingers. One day, she sculpted a vase so fine it seemed almost ethereal, inspired by the morning mist over the water. It quickly became the centerpiece of the village market, admired by all. Delba\'s creations were not just pottery; they were stories of the land, echoing its beauty and serenity.',
-    image_url: '/sellers/delba-de-oliveira.png',
+    image_url_artisan: '/sellers/delba-de-oliveira.png',
   },
   {
     id: '3958dc9e-742f-4377-85e9-fec4b6a6442a',
@@ -20,7 +20,7 @@ const artisans = [
     password: '123456',
     category: 'Blacksmith',
     story: 'In the heart of a bustling town, Lee\'s forge was always alive with the sounds of hammer striking anvil. A master blacksmith, he crafted tools and ornaments with unparalleled skill. One winter, a fierce storm hit the town, and many roofs were damaged. Lee worked tirelessly, forging nails and beams to help rebuild. His crowning achievement was a magnificent iron gate for the town\'s church, featuring intricate designs of leaves and vines. It stood as a testament to his dedication and craftsmanship, protecting the town with its strength and beauty.',
-    image_url: '/sellers/lee-robinson.png',
+    image_url_artisan: '/sellers/lee-robinson.png',
   },
   {
     id: '3958dc9e-737f-4377-85e9-fec4b6a6442a',
@@ -30,7 +30,7 @@ const artisans = [
     password: '123456',
     category: 'Glassblower',
     story: 'Hector\'s glassblowing studio was a place of magic and light. He transformed molten glass into delicate sculptures that seemed to capture the essence of fire and ice. One day, inspired by a snowflake he caught on his glove, Hector created a series of glass snowflakes, each unique and exquisite. When he displayed them in his shop, they caught the light and sparkled brilliantly, drawing admirers from afar. Hector\'s glassworks were not just decorations; they were frozen moments of beauty, capturing the fleeting wonders of nature.',
-    image_url: '/sellers/hector-simpson.png',
+    image_url_artisan: '/sellers/hector-simpson.png',
   },
   {
     id: '3958dc9e-713f-4377-85e9-fec4b6a6442b',
@@ -40,7 +40,7 @@ const artisans = [
     password: '123456',
     category: 'Weaver',
     story: 'Amy was known for her intricate weaving, creating textiles that told tales of her ancestors. In her cozy workshop, the loom\'s rhythmic clatter filled the air as she worked. One evening, while watching the sunset, she was inspired by the brilliant hues of the sky. She wove a tapestry that captured the sunset\'s essence, with threads of gold, crimson, and violet. When she unveiled it at the village fair, it left everyone in awe. Amy\'s tapestries were more than fabric; they were vibrant memories woven with love and tradition.',
-    image_url: '/sellers/amy-burns.png',
+    image_url_artisan: '/sellers/amy-burns.png',
   },
   {
     id: '3958dc9e-722f-4377-85e9-fec4b6a6442b',
@@ -50,7 +50,7 @@ const artisans = [
     password: '123456',
     category: 'Carpenter',
     story: 'jared\'s woodworking shop was filled with the scent of fresh pine and the sounds of saws and chisels. Known for his meticulous attention to detail, he created furniture that was both functional and artistic. One spring, he crafted a rocking chair for the town\'s elderly storyteller, designing it with carvings of local legends. The chair became a cherished piece, offering comfort and stirring imaginations with its detailed carvings. Jared\'s work was more than carpentry; it was a blend of comfort and history, crafted with heart and soul.',
-    image_url: '/sellers/jared-palmer.png',
+    image_url_artisan: '/sellers/jared-palmer.png',
   },
   {
     id: '3958dc9e-733f-4377-85e9-fec4b6a6442c',
@@ -60,7 +60,7 @@ const artisans = [
     password: '123456',
     category: 'Jeweler',
     story: 'In a quaint, sunlit shop, Steph crafted jewelry that was renowned for its elegance and precision. She often used gems she found herself, scouring nearby hills and streams. One evening, she discovered a rare opal, its colors shifting like a sunset. She set it into a pendant, surrounded by delicate filigree. When she wore it to the town festival, its beauty captivated everyone. Steph\'s jewelry was not just adornment; it was a celebration of nature\'s hidden treasures, turned into timeless pieces of art.',
-    image_url: '/sellers/steph-dietz.png',
+    image_url_artisan: '/sellers/steph-dietz.png',
   },
 ];
 
