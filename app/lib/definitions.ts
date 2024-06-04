@@ -34,7 +34,7 @@ export type Product = {
   id: string;
   artisan_id: string;
   name: string;
-  description: number;
+  description: string;
   price: number;
   date: string;
 };
@@ -90,6 +90,14 @@ export type InvoicesTable = {
   status: 'pending' | 'paid';
 };
 
+export type ArtisansTable = {
+  id: string;
+  fname: string;
+  lname: string;
+  story: string;
+  image_url_artisan: string;
+};
+
 export type CustomersTableType = {
   id: string;
   name: string;
@@ -113,6 +121,16 @@ export type FormattedCustomersTable = {
 export type CustomerField = {
   id: string;
   name: string;
+};
+
+export type ArtisanField = {
+  id: string;
+  fname: string;
+  lname: string;
+  email: string;
+  story: string;
+  image_url_artisan: string;
+  password: string;
 };
 
 export type InvoiceForm = {
