@@ -1,15 +1,18 @@
 import { sql } from '@vercel/postgres';
 import {
   CustomerField,
+  ArtisanField,
   CustomersTableType,
   InvoiceForm,
   InvoicesTable,
+  ArtisansTable,
   LatestInvoiceRaw,
   LatestProductRaw,
   User,
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -36,7 +39,7 @@ export async function fetchRevenue() {
 export async function fetchLatestProducts() {
   try {
     const data = await sql<LatestProductRaw>`
-      SELECT artisans.fname, artisans.lname, artisans.category, 
+      SELECT artisans.fname, artisans.lname, products.category, 
              artisans.image_url_artisan, products.price, products.name, 
              products.image_url, products.description, products.id
       FROM products
@@ -110,7 +113,8 @@ export async function fetchCardData() {
   }
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 3;
+
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
@@ -146,6 +150,32 @@ export async function fetchFilteredInvoices(
   }
 }
 
+export async function fetchFilteredArtisans(
+  query: string,
+  currentPage: number,
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const artisans = await sql<ArtisansTable>`
+      SELECT
+        artisans.id,
+        artisans.fname,
+        artisans.lname,
+        artisans.story,
+        artisans.image_url_artisan
+      FROM artisans
+      ORDER BY artisans.fname DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+
+    return artisans.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch artisans.');
+  }
+}
+
 export async function fetchInvoicesPages(query: string) {
   try {
     const count = await sql`SELECT COUNT(*)
@@ -164,6 +194,21 @@ export async function fetchInvoicesPages(query: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch total number of invoices.');
+  }
+}
+
+export async function fetchArtisansPages(query: string) {
+  noStore();
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM artisans
+  `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of artisans.');
   }
 }
 
@@ -207,6 +252,27 @@ export async function fetchCustomers() {
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch all customers.');
+  }
+}
+
+export async function fetchArtisans() {
+  try {
+    const data = await sql<ArtisanField>`
+      SELECT
+        id,
+        fname,
+        lname,
+        story
+      FROM artisans
+      ORDER BY fname ASC
+    `;
+
+    const artisans = data.rows;
+    console.log(artisans)
+    return artisans;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all artisans.');
   }
 }
 
