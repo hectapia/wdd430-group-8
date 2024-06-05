@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import bcrypt from 'bcrypt';
 import { writeFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from 'next/server';
@@ -82,7 +83,7 @@ export async function createInvoice(formData: FormData) {
 const AddArtisan = FormSchema.omit({ id: true, customerId: true,  amount: true, status: true, date: true});
 
 
-export async function addArtisan(prevState: State | undefined, formData: FormData) {
+export async function addArtisan(prevState: State | undefined, formData: FormData): Promise<State | undefined> {
 
   const artisanImg = formData.get('image_url_artisan') as File;
   const artisanImgBytes = await artisanImg.arrayBuffer();
@@ -119,12 +120,14 @@ export async function addArtisan(prevState: State | undefined, formData: FormDat
     console.log(story);
     console.log(image_url_artisan);
     console.log(password);
-      {/*}
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+      
     await sql`
-        INSERT INTO invoices (lname, fname, email, story, image_url_artisan, password)
-        VALUES (${lname}, ${fname}, ${email}, ${story}, ${image_url_artisan}, ${password})
+        INSERT INTO artisans (lname, fname, email, story, category, image_url_artisan, password)
+        VALUES (${lname}, ${fname}, ${email}, ${story}, 'Painter', ${image_url_artisan}, ${hashedPassword})
     `;
-    */}
+    
     revalidatePath('/artisans');
     redirect('/artisans');
 }
