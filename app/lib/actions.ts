@@ -170,3 +170,4 @@ export async function deleteArtisan(id: string) {
     revalidatePath('/artisans');
   }
 
+
