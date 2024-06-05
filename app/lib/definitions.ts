@@ -128,6 +128,7 @@ export type ArtisanField = {
   fname: string;
   lname: string;
   email: string;
+  category: string;
   story: string;
   image_url_artisan: string;
   password: string;
