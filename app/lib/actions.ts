@@ -82,7 +82,7 @@ export async function createInvoice(formData: FormData) {
 const AddArtisan = FormSchema.omit({ id: true, customerId: true,  amount: true, status: true, date: true});
 
 
-export async function addArtisan(prevState: State | undefined, formData: FormData) {
+export async function addArtisan(prevState: State | undefined, formData: FormData): Promise<State | undefined> {
 
   const artisanImg = formData.get('image_url_artisan') as File;
   const artisanImgBytes = await artisanImg.arrayBuffer();
