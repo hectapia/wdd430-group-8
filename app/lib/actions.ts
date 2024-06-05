@@ -4,7 +4,37 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { writeFile } from "fs/promises";
+import path from "path";
+import { NextResponse } from 'next/server';
+import { v2 as cloudinary } from 'cloudinary';
+
+// Configuration using environment variables
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
  
+
+export type State = {
+  errors?: {
+    id?: string[];
+    customerId?: string[];
+    amount?: string[];
+    status?: string[];
+    date?: string[];
+    fname?: string[];
+    lname?: string[];
+    email?: string[];
+    story?: string[];
+    image_url_artisan?: string[];
+    password?: string[];
+  }
+  message?: string | null;
+};
+
+
 const FormSchema = z.object({
   id: z.string(),
   customerId: z.string(),
@@ -19,6 +49,11 @@ const FormSchema = z.object({
   password: z.string(),
 });
  
+interface CloudinaryResponse {
+  secure_url: string;
+}
+
+
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 
 
@@ -47,15 +82,36 @@ export async function createInvoice(formData: FormData) {
 const AddArtisan = FormSchema.omit({ id: true, customerId: true,  amount: true, status: true, date: true});
 
 
-export async function addArtisan(formData: FormData) {
+export async function addArtisan(prevState: State | undefined, formData: FormData): Promise<State | undefined> {
+
+  const artisanImg = formData.get('image_url_artisan') as File;
+  const artisanImgBytes = await artisanImg.arrayBuffer();
+  const artisanImgBuffer = Buffer.from(artisanImgBytes);
+
+  const artisanImgResponse = await new Promise<CloudinaryResponse>((resolve, reject) => {
+    cloudinary.uploader
+      .upload_stream({}, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result as CloudinaryResponse);
+        }
+      }).end(artisanImgBuffer);
+  });
+  
+  //console.log(response.secure_url);
+  const artisanImgUrl = artisanImgResponse.secure_url;
+
     const { lname, fname, email, story, image_url_artisan, password } = AddArtisan.parse({
           lname: formData.get('lname'),
           fname: formData.get('fname'),
           email: formData.get('email'),
           story: formData.get('story'),
-          image_url_artisan: formData.get('image_url_artisan'),
+          image_url_artisan: artisanImg.name !== 'undefined' ? artisanImgResponse.secure_url : '/sellers/noimage.png',
           password: formData.get('password'),
       });
+
+
     // Test it out:
     console.log(lname);
     console.log(fname);
