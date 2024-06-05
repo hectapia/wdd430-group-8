@@ -165,7 +165,8 @@ export async function deleteInvoice(id: string) {
     revalidatePath('/dashboard/invoices');
   }
 
-  export async function deleteArtisan(id: string) {
+export async function deleteArtisan(id: string) {
     await sql`DELETE FROM artisans WHERE id = ${id}`;
     revalidatePath('/artisans');
   }
+
