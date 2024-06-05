@@ -1,4 +1,7 @@
+'use client';
+
 import { ArtisanField } from '@/app/lib/definitions';
+import { useFormState, useFormStatus } from 'react-dom';
 import Link from 'next/link';
 import {
   InboxIcon,
@@ -11,8 +14,10 @@ import { Button } from '@/app/ui/button';
 import { addArtisan } from '@/app/lib/actions';
 
 export default function Form({ artisans }: { artisans: ArtisanField[] }) {
+  const [state, dispatch] = useFormState(addArtisan, undefined); 
+
   return (
-    <form action={addArtisan}>
+    <form action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
 
         {/* Artisan name */}
@@ -101,7 +106,7 @@ export default function Form({ artisans }: { artisans: ArtisanField[] }) {
               <input
                 id="image_url_artisan"
                 name="image_url_artisan"
-                type="text"
+                type="file"
                 placeholder="Upload photo"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
