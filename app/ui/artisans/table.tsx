@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { UpdateInvoice, DeleteInvoice } from '@/app/ui/artisans/buttons';
+import { UpdateInvoice, DeleteArtisan } from '@/app/ui/artisans/buttons';
 {/* import InvoiceStatus from '@/app/ui/invoices/status'; */}
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices,
@@ -237,7 +237,7 @@ export default async function ArtisansTable({
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                       <div className="flex justify-end gap-3">
                         <UpdateInvoice id={artisan.id} />
-                        <DeleteInvoice id={artisan.id} />
+                        <DeleteArtisan id={artisan.id} />
                       </div>
                     </td>  
                   </tr>

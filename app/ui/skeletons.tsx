@@ -48,7 +48,7 @@ export function InvoiceSkeleton() {
   return (
     <div className="flex flex-row items-center justify-between border-b border-gray-100 py-4">
       <div className="flex items-center">
-        <div className="mr-2 h-8 w-8 rounded-full bg-red-200" />
+        <div className="mr-2 h-8 w-8 rounded-full bg-gray-200" />
         <div className="min-w-0">
           <div className="h-5 w-40 rounded-md bg-gray-200" />
           <div className="mt-2 h-4 w-12 rounded-md bg-gray-200" />
@@ -182,10 +182,10 @@ export function InvoicesTableSkeleton() {
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Customer - ggggg
+                  Customer
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Email - ggggg
+                  Email
                 </th> {/*
                 <th scope="col" className="px-3 py-5 font-medium">
                   Amount
