@@ -28,6 +28,7 @@ export type State = {
     fname?: string[];
     lname?: string[];
     email?: string[];
+    category?: string[];
     story?: string[];
     image_url_artisan?: string[];
     password?: string[];
@@ -45,6 +46,7 @@ const FormSchema = z.object({
   fname: z.string(),
   lname: z.string(),
   email: z.string(),
+  category: z.string(),
   story: z.string(),
   image_url_artisan: z.string(),
   password: z.string(),
@@ -103,10 +105,11 @@ export async function addArtisan(prevState: State | undefined, formData: FormDat
   //console.log(response.secure_url);
   const artisanImgUrl = artisanImgResponse.secure_url;
 
-    const { lname, fname, email, story, image_url_artisan, password } = AddArtisan.parse({
+    const { lname, fname, email, category, story, image_url_artisan, password } = AddArtisan.parse({
           lname: formData.get('lname'),
           fname: formData.get('fname'),
           email: formData.get('email'),
+          category: formData.get('category'),
           story: formData.get('story'),
           image_url_artisan: artisanImg.name !== 'undefined' ? artisanImgResponse.secure_url : '/sellers/noimage.png',
           password: formData.get('password'),
@@ -117,6 +120,7 @@ export async function addArtisan(prevState: State | undefined, formData: FormDat
     console.log(lname);
     console.log(fname);
     console.log(email);
+    console.log(category);
     console.log(story);
     console.log(image_url_artisan);
     console.log(password);
@@ -124,8 +128,8 @@ export async function addArtisan(prevState: State | undefined, formData: FormDat
     const hashedPassword = await bcrypt.hash(password, 10);
       
     await sql`
-        INSERT INTO artisans (lname, fname, email, story, category, image_url_artisan, password)
-        VALUES (${lname}, ${fname}, ${email}, ${story}, 'Painter', ${image_url_artisan}, ${hashedPassword})
+        INSERT INTO artisans (lname, fname, email, category, story, image_url_artisan, password)
+        VALUES (${lname}, ${fname}, ${email}, ${category}, ${story}, ${image_url_artisan}, ${hashedPassword})
     `;
     
     revalidatePath('/artisans');
@@ -160,3 +164,9 @@ export async function deleteInvoice(id: string) {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
     revalidatePath('/dashboard/invoices');
   }
+
+export async function deleteArtisan(id: string) {
+    await sql`DELETE FROM artisans WHERE id = ${id}`;
+    revalidatePath('/artisans');
+  }
+

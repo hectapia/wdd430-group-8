@@ -45,7 +45,7 @@ export async function fetchLatestProducts() {
       FROM products
       JOIN artisans ON products.artisan_id = artisans.id
       ORDER BY products.date DESC
-      LIMIT 5`;
+      LIMIT 3`;
 
     const latestProducts = data.rows.map((product) => ({
       ...product,

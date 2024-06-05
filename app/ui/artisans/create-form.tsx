@@ -9,6 +9,7 @@ import {
   KeyIcon,
   UserCircleIcon,
   CameraIcon,
+  AcademicCapIcon
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { addArtisan } from '@/app/lib/actions';
@@ -32,6 +33,7 @@ export default function Form({ artisans }: { artisans: ArtisanField[] }) {
                 name="fname"
                 type="text"
                 placeholder="Enter name"
+                required
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
               <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -51,6 +53,7 @@ export default function Form({ artisans }: { artisans: ArtisanField[] }) {
                 name="lname"
                 type="text"
                 placeholder="Enter last name"
+                required
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
               <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -70,6 +73,7 @@ export default function Form({ artisans }: { artisans: ArtisanField[] }) {
                 name="email"
                 type="email"
                 placeholder="Enter email"
+                required
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -77,6 +81,25 @@ export default function Form({ artisans }: { artisans: ArtisanField[] }) {
           </div>
         </div>
 
+        {/* Artisan category */}
+        <div className="mb-4">
+          <label htmlFor="category" className="mb-2 block text-sm font-medium">
+            Artisan category
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="category"
+                name="category"
+                type="text"
+                placeholder="Enter category"
+                required
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              />
+              <AcademicCapIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            </div>
+          </div>
+        </div>
         {/* Artisan story */}
         <div className="mb-4">
           <label htmlFor="story" className="mb-2 block text-sm font-medium">
@@ -89,6 +112,7 @@ export default function Form({ artisans }: { artisans: ArtisanField[] }) {
                 name="story"
                 type="text"
                 placeholder="Enter story"
+                required
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
               <InboxIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -108,6 +132,7 @@ export default function Form({ artisans }: { artisans: ArtisanField[] }) {
                 name="image_url_artisan"
                 type="file"
                 placeholder="Upload photo"
+                required
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
               <CameraIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -128,6 +153,7 @@ export default function Form({ artisans }: { artisans: ArtisanField[] }) {
                 type="password"
                 placeholder="Enter password"
                 minLength={6}
+                required
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
